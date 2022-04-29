@@ -8,53 +8,6 @@ t = [
     [" "," "," "],
     [" "," "," "]
 ]
-#VERIFICAR SE GANHOU
-'''
-def linhasX():
-   
-    if (t[0][0]) == "x" == (t[0][1]) == (t[0][2]):
-        print("O jogador X venceu")
-       
-    elif (t[1][0]) == "x" == (t[1][1]) == (t[1][2]):
-        print("O jogador X venceu")
-       
-    elif (t[2][0]) == "x" == (t[2][1]) == (t[2][2]):
-        print("O jogador X venceu")      
-def ColunasX():
- 
-    if (t[0][0]) == "x" == (t[1][0]) == (t[2][0]):
-        print("O jogador X venceu")     
-    elif (t[0][1]) == "x" == (t[1][1]) == (t[2][1]):
-        print("O jogador X venceu")    
-    elif (t[0][2]) == "x" == (t[1][2]) == (t[2][2]):
-        print("O jogador X venceu")     
-def diagonaisX():
-  
-    if (t[0][0]) == "x" == (t[1][1]) == (t[2][2]):
-        print("O jogador X venceu")
-       
-    if (t[2][0]) == "x" == (t[1][1]) == (t[0][2]):
-        print("O jogador X venceu")
-def linhasO():
-    if (t[0][0] == "O") and (t[0][1] =="O") and (t[0][2] == "O"):
-        print("O jogador 'O' venceu")
-    elif (t[1][0] == "O") and (t[1][1] =="O") and (t[1][2] == "O"):
-        print("O jogador 'O' venceu")
-    elif (t[2][0] == "O") and (t[2][1] =="O") and (t[2][2] == "O"):
-        print("O jogador 'O' venceu")
-def ColunasO():
-    if (t[0][0] == "O") and (t[1][0] =="O") and (t[2][0] == "O"):
-        print("O jogador 'O' venceu")
-    if (t[0][1] == "O") and (t[1][1] =="O") and (t[2][1] == "O"):
-        print("O jogador 'O' venceu")
-    if (t[0][2] == "O") and (t[1][2] =="O") and (t[2][2] == "O"):
-        print("O jogador X venceu")
-def diagonaisO():
-    if (t[0][0] == "O") and (t[1][1] =="O") and (t[2][2] == "O"):
-        print("O jogador 'O' venceu")
-    if (t[2][0] == "O") and (t[1][1] =="O") and (t[0][2] == "O"):
-        print("O jogador 'O' venceu")
-'''
 
 print ("Bem vindo ao jogo da velha")
 print("Deseja jogar sozinho ou com mais 1 jogador?"
