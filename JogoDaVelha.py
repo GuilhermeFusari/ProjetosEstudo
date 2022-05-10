@@ -80,19 +80,12 @@ def Menu():
         print("Valor Invalido, digite apenas os numeros 1,2 ou 3")
         time.sleep(2)
         os.system('cls')
-        print("Deseja jogar sozinho ou com mais 1 jogador?"
-        ,"\n", "1 - Para jogar Sozinho.", "\n", "2 - Para jogar com mais alguem.",
-        "\n", "3 - Para sair.")
-        opc = int(input("Escolha: "))
+        Menu()
     except InputError:
         print("Valor Invalido, digite apenas os numeros 1,2 ou 3")
         time.sleep(2)
         os.system('cls')
-        print("Deseja jogar sozinho ou com mais 1 jogador?"
-        ,"\n", "1 - Para jogar Sozinho.", "\n", "2 - Para jogar com mais alguem.",
-    "\n", "3 - Para sair.")
-        opc = int(input("Escolha: "))
-    return opc
+        Menu()
 os.system('cls')
 def jogarsozinho():
     global ganhou
