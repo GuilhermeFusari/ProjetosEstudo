@@ -17,7 +17,7 @@ class Error(Exception):
 class InputError(Error):
     def __init__(self,message):
         self.message = message
-
+        
 def verificavitoria():
     global ganhou
     if (t[0][0]) == (t[0][1]) == (t[0][2])== "X":
@@ -90,7 +90,6 @@ def Menu():
         time.sleep(2)
         os.system('cls')
         Menu()
-    return opc
 
 def JogadaDaPessoaO():
      print("JOGADOR 'O'")
