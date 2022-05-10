@@ -3,6 +3,9 @@ import random
 import time
 
 os.system('cls')
+ganhou ="n"
+tentativas = 0
+JN = "S"
 t= [
 [" ", " ", " "],
 [" ", " ", " "],
@@ -14,7 +17,7 @@ class Error(Exception):
 class InputError(Error):
     def __init__(self,message):
         self.message = message
-ganhou ="n"
+
 def verificavitoria():
     global ganhou
     if (t[0][0]) == (t[0][1]) == (t[0][2])== "X":
@@ -66,6 +69,7 @@ def verificavitoria():
         print("O jogador 'O' venceu")
         ganhou = "s"
     return ganhou
+
 def Menu():
     print("Deseja jogar sozinho ou com mais 1 jogador?"
     ,"\n", "1 - Para jogar Sozinho.", "\n", "2 - Para jogar com mais alguem.",
@@ -80,62 +84,77 @@ def Menu():
         print("Valor Invalido, digite apenas os numeros 1,2 ou 3")
         time.sleep(2)
         os.system('cls')
-        print("Deseja jogar sozinho ou com mais 1 jogador?"
-        ,"\n", "1 - Para jogar Sozinho.", "\n", "2 - Para jogar com mais alguem.",
-        "\n", "3 - Para sair.")
-        opc = int(input("Escolha: "))
+        Menu()
     except InputError:
         print("Valor Invalido, digite apenas os numeros 1,2 ou 3")
         time.sleep(2)
         os.system('cls')
-        print("Deseja jogar sozinho ou com mais 1 jogador?"
-        ,"\n", "1 - Para jogar Sozinho.", "\n", "2 - Para jogar com mais alguem.",
-    "\n", "3 - Para sair.")
-        opc = int(input("Escolha: "))
+        Menu()
     return opc
-os.system('cls')
-def jogarsozinho():
-    global ganhou
-    global t
-    print("O jogador 'x' é quem começa, se decidiu por jogar sozinho você é o jogador 'x'.")
+
+def JogadaDaPessoaO():
+     print("JOGADOR 'O'")
+     print("tentativas: ", tentativas);
+     continuar = "s"
+     while continuar == "s":
+        y = input("Digite uma linha: ");
+        z = input("Digite uma coluna: ");
+        if t[int(y)][int(z)] == " ":
+            t[int(y)][int(z)] = "O"
+            continuar = "n"
+            break
+        else:
+            print("Você digitou em um lugar que ja foi feita uma jogada\nTente novamente")
+            time.sleep(2)
+            continuar = "s"
+     LimparTela()
+
+def MostrarJogo():
     (print("     0   1   2", "\n", "0 -", t[0][0], "|", t[0][1], "|", t[0][2],
-        "\n ", "   ----------", "\n", "1 -", t[1][0], "|", t[1][1], "|", t[1][2],
-        "\n", "   ----------", "\n", "2 -", t[2][0], "|", t[2][1], "|", t[2][2]));
-    JN = "S"
-    while JN == "S":
-        ganhou = "n"
-        t = [
-            [" ", " ", " "],
-            [" ", " ", " "],
-            [" ", " ", " "]
-         ]
-        tentativas = 0
-        while ganhou != "s":
+    "\n ", "   ----------", "\n", "1 -", t[1][0], "|", t[1][1], "|", t[1][2],
+    "\n", "   ----------", "\n", "2 -", t[2][0], "|", t[2][1], "|", t[2][2]));
+
+def JogadaBot():
+    continuar = "s"
+    while continuar == "s":
+        y = random.randrange(0, 2)
+        z = random.randrange(0, 2)
+        if t[int(y)][int(z)] == " ":
+            t[int(y)][int(z)] = "O"
+            continuar = "n"
+            break
+        else:
+            continuar = "s"
+    LimparTela()
+
+def JogadaDaPessoaX():
+    print("JOGADOR 'X'")
+    print("tentativas: ", tentativas);
+    continuar = "s"
+    while continuar == "s":
+        y = input("Digite uma linha: ");
+        z = input("Digite uma coluna: ");
+        if t[int(y)][int(z)] == " ":
+            t[int(y)][int(z)] = "X"
+            continuar = "n"
+            break
+        else:
+            print("Você digitou em um lugar que ja foi feita uma jogada\nTente novamente")
+            time.sleep(2)
+            continuar = "s"
+    LimparTela()
+
+def Jogo1():
+    global tentativas
+    while ganhou != "s":
             if tentativas == 9:
                 break
             else:
                 pass
             # JOGADOR "X"
-            print("SUA JOGADA")
-            print("tentativas: ", tentativas);
-            continuar = "s"
-            while continuar == "s":
-                y = input("Digite uma linha: ");
-                z = input("Digite uma coluna: ");
-                if t[int(y)][int(z)] == " ":
-                    t[int(y)][int(z)] = "X"
-                    continuar = "n"
-                    break
-                else:
-                    print("Você digitou em um lugar que ja foi feita uma jogada\nTente novamente")
-                    time.sleep(2)
-                    continuar = "s"
+            JogadaDaPessoaX()
 
-            (os.system('cls'));
-
-            (print("     0   1   2", "\n", "0 -", t[0][0], "|", t[0][1], "|", t[0][2],
-                "\n ", "   ----------", "\n", "1 -", t[1][0], "|", t[1][1], "|", t[1][2],
-                "\n", "   ----------", "\n", "2 -", t[2][0], "|", t[2][1], "|", t[2][2]));
+            MostrarJogo()
 
             verificavitoria()
             tentativas += 1;
@@ -146,71 +165,24 @@ def jogarsozinho():
             else:
                 pass
             time.sleep(1/2)
-            continuar = "s"
-            while continuar == "s":
-                y = random.randrange(0, 2)
-                x = random.randrange(0, 2)
-                if t[int(y)][int(z)] == " ":
-                    t[int(y)][int(z)] = "O"
-                    continuar = "n"
-                    break
-                else:
-                    continuar = "s"
+            JogadaBot()
 
-            (os.system('cls'));
-
-            (print("     0   1   2", "\n", "0 -", t[0][0], "|", t[0][1], "|", t[0][2],
-                "\n ", "   ----------", "\n", "1 -", t[1][0], "|", t[1][1], "|", t[1][2],
-                "\n", "   ----------", "\n", "2 -", t[2][0], "|", t[2][1], "|", t[2][2]));
+            MostrarJogo()
             verificavitoria()
             tentativas += 1;
 
-        JN = input("Jogar Novamente? (S/N): ")
-    print("Obrigado por jogar\nFechando...")
-    time.sleep(3)
-    os.system('cls')
-    
-def jogarcomalguem():
-    global ganhou
-    global t
-   
-    print("O jogador 'x' é quem começa, se decidiu por jogar sozinho você é o jogador 'x'.")
-    (print("     0   1   2", "\n", "0 -", t[0][0], "|", t[0][1], "|", t[0][2],
-        "\n ", "   ----------", "\n", "1 -", t[1][0], "|", t[1][1], "|", t[1][2],
-        "\n", "   ----------", "\n", "2 -", t[2][0], "|", t[2][1], "|", t[2][2]));
-    JN = "S"
-    while JN == "S":
-        t = [
-            [" ", " ", " "],
-            [" ", " ", " "],
-            [" ", " ", " "]
-        ]
-        tentativas = 0
-        while ganhou !="s":
+def Jogo2():
+    global tentativas
+    while ganhou !="s":
             if tentativas == 9:
                 break
             else:
                 pass 
             # JOGADOR "X"
-            print("JOGADOR 'X'")
-            print("tentativas: ", tentativas);
-            continuar = "s"
-            while continuar == "s":
-                y = input("Digite uma linha: ");
-                z = input("Digite uma coluna: ");
-                if t[int(y)][int(z)] == " ":
-                    t[int(y)][int(z)] = "X"
-                    continuar = "n"
-                    break
-                else:
-                    print("Você digitou em um lugar que ja foi feita uma jogada\nTente novamente")
-                    time.sleep(2)
-                    continuar = "s"
-            (os.system('cls'));
+            JogadaDaPessoaX()
 
-            (print("     0   1   2", "\n", "0 -", t[0][0], "|", t[0][1], "|", t[0][2],
-                "\n ", "   ----------", "\n", "1 -", t[1][0], "|", t[1][1], "|", t[1][2],
-                "\n", "   ----------", "\n", "2 -", t[2][0], "|", t[2][1], "|", t[2][2]));
+            MostrarJogo()
+
             verificavitoria()
 
             tentativas += 1;
@@ -220,34 +192,75 @@ def jogarcomalguem():
                 break
             else:
                 pass
-            print("JOGADOR 'O'")
-            print("tentativas: ", tentativas);
-            print("Ganhou: ",ganhou)
-            continuar = "s"
-            while continuar == "s":
-                y = input("Digite uma linha: ");
-                z = input("Digite uma coluna: ");
-                if t[int(y)][int(z)] == " ":
-                    t[int(y)][int(z)] = "O"
-                    continuar = "n"
-                    break
-                else:
-                    print("Você digitou em um lugar que ja foi feita uma jogada\nTente novamente")
-                    time.sleep(2)
-                    continuar = "s"
+            JogadaDaPessoaO()
 
-            (os.system('cls'));
+            MostrarJogo()
 
-            (print("     0   1   2", "\n", "0 -", t[0][0], "|", t[0][1], "|", t[0][2],
-                "\n ", "   ----------", "\n", "1 -", t[1][0], "|", t[1][1], "|", t[1][2],
-                "\n", "   ----------", "\n", "2 -", t[2][0], "|", t[2][1], "|", t[2][2]));
             verificavitoria()
+
             tentativas += 1;
 
-        JN = input("Jogar Novamente? (S/N): ")
-    print("Obrigado por jogar\nFechando...")
-    time.sleep(3)
+def LimparTela():
     os.system('cls')
+
+def jogarsozinho():
+    global ganhou
+    global t
+    global JN
+    global tentativas
+
+    print("O jogador 'x' é quem começa, se decidiu por jogar sozinho você é o jogador 'x'.")
+
+    MostrarJogo()
+
+    while JN == "S":
+        #RESETANDO O VALOR DE GANHOU E DE T PARA O JOGO RODAR NOVAMENTE
+        ganhou = "n"
+        t = [
+            [" ", " ", " "],
+            [" ", " ", " "],
+            [" ", " ", " "]
+         ]
+        Jogo1()
+
+        JN = input("Jogar Novamente? (S/N): ")
+
+        tentativas = 0
+
+    print("Obrigado por jogar\nFechando...")
+
+    time.sleep(3);LimparTela()
+    
+def jogarcomalguem():
+    global ganhou
+    global t
+    global JN
+    global tentativas
+
+    print("O jogador 'x' é quem começa, se decidiu por jogar sozinho você é o jogador 'x'.")
+
+    MostrarJogo()
+
+    while JN == "S":
+        # RESETANDO O VALOR DE TENTATIVAS E DE GANHOU PARA O JOGO RODAR NOVAMENTE
+        tentativas = 0
+        ganhou = "n"
+        t = [
+            [" ", " ", " "],
+            [" ", " ", " "],
+            [" ", " ", " "]
+        ]
+
+        Jogo2()
+        
+        JN = input("Jogar Novamente? (S/N): ")
+
+        tentativas = 0
+
+    print("Obrigado por jogar\nFechando...")
+
+    time.sleep(3);LimparTela()
+    
 ret = Menu()
 while int(ret) < 4:
     if ret == 1:
@@ -259,5 +272,5 @@ while int(ret) < 4:
         time.sleep(3)
         break
     ret = Menu()
-    os.system('cls')
+    LimparTela()
 print("Programa Finalizado")
